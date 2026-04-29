@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI商机内参 - 不追热点，只挖真金</title>
+    <meta name="description" content="每周3份深度AI商业机会分析报告，帮创业者、副业玩家和传统老板找到真机会、避开假风口。不是科普，是实操指南。">
+    <meta name="keywords" content="AI商机,AI赚钱,AI副业,AI创业,AI商业化,商业机会分析">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         :root{
@@ -74,17 +76,27 @@
         .plan-name{font-size:1rem;font-weight:700;margin-bottom:.25rem}
         .plan-price{font-size:1.6rem;font-weight:800;color:var(--primary);margin-bottom:.15rem}
         .plan-price span{font-size:.82rem;color:var(--text-sub);font-weight:400}
-        .plan-price .original{font-size:.82rem;color:var(--text-sub);font-weight:400;text-decoration:line-through;margin-left:.3rem}
         .plan-desc{font-size:.82rem;color:var(--text-sub);margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
         .plan-features{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.2rem;flex:1}
         .plan-features li{font-size:.82rem;display:flex;align-items:flex-start;gap:.45rem;color:var(--text);line-height:1.6}
         .plan-features li::before{content:"";display:inline-block;width:16px;height:16px;min-width:16px;background:#ecfdf5;border-radius:50%;margin-top:2px;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='%23059669' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'/%3E%3C/svg%3E");background-size:10px;background-repeat:no-repeat;background-position:center}
         .plan-features li.disabled{color:var(--text-sub);opacity:.5}
         .plan-features li.disabled::before{background:#f1f5f9;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='%2394a3b8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.28 2.22a.75.75 0 0 0-1.06 1.06L5.94 7.5 2.22 11.28a.751.751 0 0 0 .018 1.042.751.751 0 0 0 1.042.018L7 8.56l3.72 3.72a.75.75 0 0 0 1.06-1.06L8.06 7.5l3.72-3.72a.75.75 0 0 0-1.06-1.06L7 6.44 3.28 2.22Z'/%3E%3C/svg%3E")}
+
         .plan-btn{display:block;width:100%;padding:.65rem;border-radius:10px;font-size:.88rem;font-weight:600;text-align:center;cursor:pointer;transition:all .2s;border:none}
         .plan-btn.primary{background:var(--accent);color:#fff}.plan-btn.primary:hover{background:var(--accent-dark)}
         .plan-btn.outline{background:transparent;color:var(--text);border:1.5px solid var(--border)}.plan-btn.outline:hover{border-color:var(--accent);color:var(--accent)}
         .plan-btn.ghost{background:var(--bg);color:var(--text-sub);border:1px solid var(--border)}.plan-btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+        /* channels */
+        .channels{background:var(--bg)}
+        .channel-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;max-width:1080px;margin:0 auto}
+        .channel-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.2rem;text-align:center;transition:all .25s}
+        .channel-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.05)}
+        .channel-card.main{border-color:var(--accent);box-shadow:0 4px 16px rgba(37,99,235,.08)}
+        .channel-tag{display:inline-block;background:#dbeafe;color:var(--accent);padding:.15rem .55rem;border-radius:4px;font-size:.68rem;font-weight:600;margin-bottom:.8rem}
+        .channel-card h4{font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+        .channel-card p{font-size:.78rem;color:var(--text-sub);line-height:1.6}
 
         /* sample */
         .sample{background:var(--bg)}
@@ -101,13 +113,12 @@
         .sample-more a{color:var(--accent);font-size:.9rem;font-weight:600}
         .sample-more a:hover{text-decoration:underline}
 
-        /* testimonials */
-        .testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-        .testimonial-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.6rem}
-        .testimonial-card .stars{color:var(--gold);font-size:.85rem;letter-spacing:2px;margin-bottom:.8rem}
-        .testimonial-card p{font-size:.9rem;color:var(--text);line-height:1.7;margin-bottom:1rem}
-        .testimonial-card .author{font-size:.82rem;color:var(--text-sub);font-weight:500}
-        .testimonial-card .author span{color:var(--text);font-weight:600}
+        /* process */
+        .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:1080px;margin:0 auto}
+        .process-card{text-align:center;padding:1.5rem 1rem}
+        .process-num{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;margin:0 auto 1rem}
+        .process-card h4{font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+        .process-card p{font-size:.82rem;color:var(--text-sub);line-height:1.6}
 
         /* faq */
         .faq{background:var(--bg)}
@@ -126,19 +137,29 @@
         .cta p{color:var(--text-sub);margin-bottom:2rem;font-size:1rem}
         .cta .guarantee{font-size:.8rem;color:var(--green);margin-top:1rem;font-weight:500}
 
+        /* wechat hint */
+        .wechat-qr-placeholder{display:inline-flex;flex-direction:column;align-items:center;margin-top:2rem;padding:1.5rem 2rem;background:#f0fdf4;border:2px dashed #86efac;border-radius:14px}
+        .wechat-qr-placeholder .qr-box{width:140px;height:140px;background:#fff;border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--text-sub);margin-bottom:.8rem}
+        .wechat-qr-placeholder p{font-size:.82rem;color:var(--text-sub)}
+
         /* footer */
         footer{background:var(--primary);color:rgba(255,255,255,.6);padding:2.5rem 1.5rem;text-align:center;font-size:.82rem}
         footer a{color:rgba(255,255,255,.8)}
-        footer .footer-links{display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem}
+        footer .footer-links{display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem;flex-wrap:wrap}
         footer .footer-links a:hover{color:#fff}
 
         /* responsive */
         @media(max-width:768px){
             .hero h1{font-size:2rem}
             .hero-stats{gap:1.5rem;flex-wrap:wrap}
-            .problem-grid,.testimonial-grid{grid-template-columns:1fr}
+            .problem-grid{grid-template-columns:1fr}
             .product-grid{grid-template-columns:1fr;max-width:400px}
+            .channel-grid{grid-template-columns:repeat(2,1fr)}
+            .process-grid{grid-template-columns:repeat(2,1fr)}
             .nav-right a:not(.nav-cta){display:none}
+        }
+        @media(max-width:480px){
+            .channel-grid{grid-template-columns:1fr;max-width:300px}
         }
     </style>
 </head>
@@ -160,7 +181,7 @@
 <!-- HERO -->
 <section class="hero">
     <div class="container">
-        <div class="badge">2026年4月上线 / 已持续更新30+期</div>
+        <div class="badge">2026年4月上线 / 持续更新中</div>
         <h1>AI赚钱的机会，90%是假的。<br>剩下<em>10%</em>我帮你找出来。</h1>
         <p class="sub">每周3份深度AI商业机会分析报告，帮创业者、副业玩家和传统老板找到真机会、避开假风口。不是科普，是实操指南。</p>
         <div class="hero-btns">
@@ -214,7 +235,7 @@
             <div class="plan-card">
                 <div class="plan-name">免费版</div>
                 <div class="plan-price">0元</div>
-                <div class="plan-desc">每周1期精简报告，在小红书公开发布</div>
+                <div class="plan-desc">每周1期精简报告，公众号/小红书公开发布</div>
                 <ul class="plan-features">
                     <li>每周1期精简版报告</li>
                     <li>TOP1商机概览</li>
@@ -222,7 +243,7 @@
                     <li class="disabled">可行性评分</li>
                     <li class="disabled">风险提示</li>
                 </ul>
-                <a href="https://www.xiaohongshu.com/search_result?keyword=AI观察笔记&source=web_search_result_notes" target="_blank" class="plan-btn ghost">在小红书免费看</a>
+                <a href="#cta" class="plan-btn ghost">关注公众号</a>
             </div>
             <!-- Starter -->
             <div class="plan-card popular">
@@ -268,7 +289,39 @@
                     <li>不限次微信/邮件咨询</li>
                     <li>季度1对1深度咨询（60分钟）</li>
                 </ul>
-                <a href="#cta" class="plan-btn outline">联系我们</a>
+                <a href="mailto:contact@kfkfkf.xyz" class="plan-btn outline">联系我们</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="channels">
+    <div class="container">
+        <div class="section-title">
+            <h2>报告怎么来的</h2>
+            <p>每天4小时，从海量信息中筛选真机会</p>
+        </div>
+        <div class="process-grid">
+            <div class="process-card">
+                <div class="process-num">1</div>
+                <h4>全网信息采集</h4>
+                <p>每天扫描国内外AI资讯源，覆盖投融资、产品发布、政策动态等</p>
+            </div>
+            <div class="process-card">
+                <div class="process-num">2</div>
+                <h4>AI系统初筛</h4>
+                <p>本地AI模型批量评分，过滤掉90%的噪音和假风口</p>
+            </div>
+            <div class="process-card">
+                <div class="process-num">3</div>
+                <h4>人工深度验证</h4>
+                <p>对高评分商机做可行性研究，评估市场规模、竞争格局和落地难度</p>
+            </div>
+            <div class="process-card">
+                <div class="process-num">4</div>
+                <h4>报告撰写推送</h4>
+                <p>整理成普通人能看懂的实操报告，微信私聊点对点发送PDF</p>
             </div>
         </div>
     </div>
@@ -283,8 +336,8 @@
         </div>
         <div class="sample-card">
             <div class="sample-header">
-                <h3>AI商机内参 #028</h3>
-                <div class="sample-date">2026年4月27日</div>
+                <h3>AI商机内参 样例</h3>
+                <div class="sample-date">2026年4月</div>
             </div>
             <div class="sample-item">
                 <div class="tag">置信度 85%</div>
@@ -308,33 +361,6 @@
     </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section>
-    <div class="container">
-        <div class="section-title">
-            <h2>订阅者怎么说</h2>
-            <p>来自真实用户的反馈</p>
-        </div>
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>"之前在各种AI群里潜水了大半年，全是概念。看了商机内参之后，第2周就选定了AI内容代运营的方向，现在已经接到第一个客户了。"</p>
-                <div class="author"><span>陈先生</span> / 深圳 · 副业探索者</div>
-            </div>
-            <div class="testimonial-card">
-                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>"报告里的风险提示特别好，帮我省了至少2000块的试错成本。9块9一个月，试错成本几乎为零，值。"</p>
-                <div class="author"><span>林女士</span> / 广州 · 电商从业者</div>
-            </div>
-            <div class="testimonial-card">
-                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>"作为传统行业老板，最怕跟风投钱打水漂。这份报告帮我理清了哪些AI工具是真能降本增效的，哪些是噱头。"</p>
-                <div class="author"><span>王总</span> / 东莞 · 制造业</div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- FAQ -->
 <section id="faq" class="faq">
     <div class="container">
@@ -353,7 +379,7 @@
             </div>
             <div class="faq-item">
                 <div class="faq-q" onclick="toggleFaq(this)">报告怎么发送？<span class="arrow">&#9660;</span></div>
-                <div class="faq-a">通过微信私聊点对点发送PDF文件，每次推送都会有提醒。你也可以在小红书私信我们获取。</div>
+                <div class="faq-a">通过微信私聊点对点发送PDF文件，每次推送都会有提醒。免费版精简报告会在公众号和小红书同步发布。</div>
             </div>
             <div class="faq-item">
                 <div class="faq-q" onclick="toggleFaq(this)">入门版和专业版的核心区别？<span class="arrow">&#9660;</span></div>
@@ -362,6 +388,10 @@
             <div class="faq-item">
                 <div class="faq-q" onclick="toggleFaq(this)">我是小白，能看懂吗？<span class="arrow">&#9660;</span></div>
                 <div class="faq-a">完全可以。报告专门写给普通人看的，没有技术术语堆砌。每个机会都配有"行动清单"，就是一步一步告诉你该怎么做。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">怎么订阅？<span class="arrow">&#9660;</span></div>
+                <div class="faq-a">关注下方公众号，发送"订阅"即可。支持微信支付，订阅后立即开通，第一次报告在下一个推送日发送。</div>
             </div>
         </div>
     </div>
@@ -372,10 +402,11 @@
     <div class="container">
         <h2>9.9元，开始找到你的AI变现方向</h2>
         <p>入门版限时特惠 <strong>9.9元/月</strong>，前200名订阅后永久锁定此价格</p>
-        <div class="hero-btns">
-            <a href="https://www.xiaohongshu.com/search_result?keyword=AI观察笔记&source=web_search_result_notes" target="_blank" class="btn btn-primary" style="font-size:1rem;padding:.8rem 2rem">打开小红书搜索: AI观察笔记</a>
+        <div style="display:inline-flex;flex-direction:column;align-items:center;margin-top:2rem;padding:1.5rem 2rem;background:#f0fdf4;border:2px solid #86efac;border-radius:14px">
+            <img src="wechat_qrcode.jpg" alt="AI商机内参公众号二维码" style="width:160px;height:160px;border-radius:10px">
+            <p style="font-size:.88rem;color:var(--text);font-weight:600;margin-top:.8rem">微信扫码关注公众号，发送"订阅"开始</p>
         </div>
-        <div class="guarantee">7天无理由退款保证 | 支持随时取消订阅</div>
+        <div class="guarantee" style="margin-top:1.5rem">7天无理由退款保证 | 支持随时取消订阅</div>
     </div>
 </section>
 
@@ -383,10 +414,10 @@
 <footer>
     <div class="footer-links">
         <a href="https://www.xiaohongshu.com/search_result?keyword=AI观察笔记&source=web_search_result_notes" target="_blank">小红书: AI观察笔记</a>
-        <a href="#faq">常见问题</a>
         <a href="mailto:contact@kfkfkf.xyz">联系我们</a>
+        <a href="#faq">常见问题</a>
     </div>
-    <p>AI商机内参 &copy; 2026 &nbsp;|&nbsp; 本报告内容由AI分析系统生成，人工审核后发送</p>
+    <p>AI商机内参 &copy; 2026</p>
     <p style="margin-top:.3rem">报告内容仅供参考，不构成投资建议</p>
 </footer>
 
