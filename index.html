@@ -289,7 +289,7 @@
                     <li>不限次微信/邮件咨询</li>
                     <li>季度1对1深度咨询（60分钟）</li>
                 </ul>
-                <a href="mailto:contact@kfkfkf.xyz" class="plan-btn outline">联系我们</a>
+                <a href="javascript:void(0)" onclick="document.getElementById('contactModal').style.display='flex'" class="plan-btn outline">添加微信咨询</a>
             </div>
         </div>
     </div>
@@ -426,12 +426,27 @@
 <footer>
     <div class="footer-links">
         <a href="https://www.xiaohongshu.com/search_result?keyword=AI观察笔记&source=web_search_result_notes" target="_blank">小红书: AI观察笔记</a>
-        <a href="mailto:contact@kfkfkf.xyz">联系我们</a>
+        <a href="javascript:void(0)" onclick="document.querySelector('.cta-section').scrollIntoView({behavior:'smooth'})">联系我们</a>
         <a href="#faq">常见问题</a>
     </div>
     <p>AI商机内参 &copy; 2026</p>
     <p style="margin-top:.3rem">报告内容仅供参考，不构成投资建议</p>
 </footer>
+
+<!-- Contact Modal -->
+<div id="contactModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:9999;justify-content:center;align-items:center">
+    <div style="background:#fff;border-radius:16px;padding:2.5rem 2rem;max-width:360px;text-align:center;position:relative">
+        <div onclick="document.getElementById('contactModal').style.display='none'" style="position:absolute;top:1rem;right:1.2rem;font-size:1.5rem;cursor:pointer;color:#94a3b8;line-height:1">&times;</div>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="#07C160" style="margin-bottom:1rem"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/></svg>
+        <h3 style="font-size:1.15rem;font-weight:700;color:#1e293b;margin-bottom:.8rem">添加微信咨询</h3>
+        <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:1rem 1.2rem;margin-bottom:1rem">
+            <div style="font-size:.78rem;color:#64748b;margin-bottom:.3rem">微信号</div>
+            <div style="font-size:1.2rem;font-weight:700;color:#059669;letter-spacing:.5px">AIpapper</div>
+        </div>
+        <p style="font-size:.82rem;color:#64748b;line-height:1.6">打开微信搜索上方微信号添加<br>添加时请备注"企业咨询"</p>
+        <button onclick="navigator.clipboard.writeText('AIpapper');this.textContent='已复制';setTimeout(()=>this.textContent='复制微信号',1500)" style="margin-top:1rem;background:#059669;color:#fff;border:none;padding:.55rem 1.8rem;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer">复制微信号</button>
+    </div>
+</div>
 
 <script>
 function toggleFaq(el){
