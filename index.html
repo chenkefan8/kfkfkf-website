@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI商机内参 - 不追热点，只挖真金</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --primary:#0a0a0a;
+            --accent:#2563eb;
+            --accent-dark:#1d4ed8;
+            --text:#1e293b;
+            --text-sub:#64748b;
+            --bg:#f8fafc;
+            --card:#fff;
+            --border:#e2e8f0;
+            --gold:#d97706;
+            --green:#059669;
+        }
+        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--text);line-height:1.7;background:#fff}
+        a{text-decoration:none;color:inherit}
+
+        /* nav */
+        nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100}
+        .nav-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:60px;padding:0 1.5rem}
+        .logo{font-size:1.15rem;font-weight:700;color:var(--primary)}.logo b{color:var(--accent)}
+        .nav-right{display:flex;align-items:center;gap:1.5rem}
+        .nav-right a{color:var(--text-sub);font-size:.88rem;font-weight:500;transition:color .2s}
+        .nav-right a:hover{color:var(--accent)}
+        .nav-cta{background:var(--accent)!important;color:#fff!important;padding:.45rem 1.1rem;border-radius:8px;font-weight:600!important}
+        .nav-cta:hover{background:var(--accent-dark)!important}
+
+        /* hero */
+        .hero{padding:9rem 1.5rem 5rem;text-align:center;background:linear-gradient(180deg,#eef2ff 0%,#fff 100%)}
+        .badge{display:inline-block;background:#eff6ff;color:var(--accent);padding:.35rem .9rem;border-radius:50px;font-size:.78rem;font-weight:600;margin-bottom:1.2rem;border:1px solid #bfdbfe}
+        .hero h1{font-size:2.75rem;font-weight:800;line-height:1.25;color:var(--primary);max-width:650px;margin:0 auto 1rem;letter-spacing:-.8px}
+        .hero h1 em{color:var(--accent);font-style:normal}
+        .hero .sub{font-size:1.1rem;color:var(--text-sub);max-width:520px;margin:0 auto 2.5rem;line-height:1.85}
+        .hero-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+        .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.6rem;border-radius:10px;font-size:.95rem;font-weight:600;transition:all .2s;border:none;cursor:pointer}
+        .btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-dark);transform:translateY(-1px)}
+        .btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--border)}.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+        .hero-stats{display:flex;justify-content:center;gap:3rem;margin-top:3.5rem}
+        .hero-stats .stat{text-align:center}
+        .hero-stats .num{font-size:1.8rem;font-weight:800;color:var(--primary)}
+        .hero-stats .num em{color:var(--accent);font-style:normal}
+        .hero-stats .label{font-size:.8rem;color:var(--text-sub);margin-top:.15rem}
+
+        /* section common */
+        section{padding:5rem 1.5rem}
+        .container{max-width:1080px;margin:0 auto}
+        .section-title{text-align:center;margin-bottom:3rem}
+        .section-title h2{font-size:1.8rem;font-weight:700;color:var(--primary);letter-spacing:-.5px}
+        .section-title p{color:var(--text-sub);margin-top:.5rem;font-size:1rem}
+
+        /* problem */
+        .problems{background:var(--bg)}
+        .problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+        .problem-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem;transition:all .25s}
+        .problem-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+        .problem-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1rem}
+        .problem-card:nth-child(1) .problem-icon{background:#fef3c7;color:var(--gold)}
+        .problem-card:nth-child(2) .problem-icon{background:#fee2e2;color:#dc2626}
+        .problem-card:nth-child(3) .problem-icon{background:#e0e7ff;color:#4f46e5}
+        .problem-card h3{font-size:1.05rem;font-weight:700;margin-bottom:.5rem}
+        .problem-card p{font-size:.9rem;color:var(--text-sub);line-height:1.7}
+
+        /* product */
+        .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;max-width:1080px;margin:0 auto}
+        .plan-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.4rem 1.2rem;position:relative;transition:all .25s;display:flex;flex-direction:column}
+        .plan-card.popular{border-color:var(--accent);box-shadow:0 4px 20px rgba(37,99,235,.1)}
+        .plan-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:.25rem .8rem;border-radius:50px;font-size:.72rem;font-weight:600;white-space:nowrap}
+        .plan-name{font-size:1rem;font-weight:700;margin-bottom:.25rem}
+        .plan-price{font-size:1.6rem;font-weight:800;color:var(--primary);margin-bottom:.15rem}
+        .plan-price span{font-size:.82rem;color:var(--text-sub);font-weight:400}
+        .plan-price .original{font-size:.82rem;color:var(--text-sub);font-weight:400;text-decoration:line-through;margin-left:.3rem}
+        .plan-desc{font-size:.82rem;color:var(--text-sub);margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+        .plan-features{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.2rem;flex:1}
+        .plan-features li{font-size:.82rem;display:flex;align-items:flex-start;gap:.45rem;color:var(--text);line-height:1.6}
+        .plan-features li::before{content:"";display:inline-block;width:16px;height:16px;min-width:16px;background:#ecfdf5;border-radius:50%;margin-top:2px;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='%23059669' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'/%3E%3C/svg%3E");background-size:10px;background-repeat:no-repeat;background-position:center}
+        .plan-features li.disabled{color:var(--text-sub);opacity:.5}
+        .plan-features li.disabled::before{background:#f1f5f9;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='%2394a3b8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.28 2.22a.75.75 0 0 0-1.06 1.06L5.94 7.5 2.22 11.28a.751.751 0 0 0 .018 1.042.751.751 0 0 0 1.042.018L7 8.56l3.72 3.72a.75.75 0 0 0 1.06-1.06L8.06 7.5l3.72-3.72a.75.75 0 0 0-1.06-1.06L7 6.44 3.28 2.22Z'/%3E%3C/svg%3E")}
+        .plan-btn{display:block;width:100%;padding:.65rem;border-radius:10px;font-size:.88rem;font-weight:600;text-align:center;cursor:pointer;transition:all .2s;border:none}
+        .plan-btn.primary{background:var(--accent);color:#fff}.plan-btn.primary:hover{background:var(--accent-dark)}
+        .plan-btn.outline{background:transparent;color:var(--text);border:1.5px solid var(--border)}.plan-btn.outline:hover{border-color:var(--accent);color:var(--accent)}
+        .plan-btn.ghost{background:var(--bg);color:var(--text-sub);border:1px solid var(--border)}.plan-btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+        /* sample */
+        .sample{background:var(--bg)}
+        .sample-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2.2rem;max-width:700px;margin:0 auto}
+        .sample-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+        .sample-header h3{font-size:1.05rem;font-weight:700}
+        .sample-date{font-size:.8rem;color:var(--text-sub);background:var(--bg);padding:.2rem .6rem;border-radius:6px}
+        .sample-item{margin-bottom:1.3rem}
+        .sample-item:last-child{margin-bottom:0}
+        .sample-item .tag{display:inline-block;background:#dbeafe;color:var(--accent);padding:.15rem .5rem;border-radius:4px;font-size:.72rem;font-weight:600;margin-bottom:.4rem}
+        .sample-item h4{font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+        .sample-item p{font-size:.85rem;color:var(--text-sub);line-height:1.7}
+        .sample-more{text-align:center;margin-top:1.5rem}
+        .sample-more a{color:var(--accent);font-size:.9rem;font-weight:600}
+        .sample-more a:hover{text-decoration:underline}
+
+        /* testimonials */
+        .testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+        .testimonial-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.6rem}
+        .testimonial-card .stars{color:var(--gold);font-size:.85rem;letter-spacing:2px;margin-bottom:.8rem}
+        .testimonial-card p{font-size:.9rem;color:var(--text);line-height:1.7;margin-bottom:1rem}
+        .testimonial-card .author{font-size:.82rem;color:var(--text-sub);font-weight:500}
+        .testimonial-card .author span{color:var(--text);font-weight:600}
+
+        /* faq */
+        .faq{background:var(--bg)}
+        .faq-list{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:.8rem}
+        .faq-item{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+        .faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.4rem;cursor:pointer;font-size:.95rem;font-weight:600;user-select:none;transition:background .2s}
+        .faq-q:hover{background:#f8fafc}
+        .faq-q .arrow{font-size:.7rem;color:var(--text-sub);transition:transform .2s}
+        .faq-q.open .arrow{transform:rotate(180deg)}
+        .faq-a{padding:0 1.4rem;max-height:0;overflow:hidden;transition:all .3s ease;font-size:.88rem;color:var(--text-sub);line-height:1.8}
+        .faq-a.show{max-height:200px;padding:0 1.4rem 1.1rem}
+
+        /* cta */
+        .cta{text-align:center;padding:5rem 1.5rem 6rem;background:linear-gradient(180deg,#fff 0%,#eef2ff 100%)}
+        .cta h2{font-size:1.8rem;font-weight:800;color:var(--primary);margin-bottom:.6rem;letter-spacing:-.5px}
+        .cta p{color:var(--text-sub);margin-bottom:2rem;font-size:1rem}
+        .cta .guarantee{font-size:.8rem;color:var(--green);margin-top:1rem;font-weight:500}
+
+        /* footer */
+        footer{background:var(--primary);color:rgba(255,255,255,.6);padding:2.5rem 1.5rem;text-align:center;font-size:.82rem}
+        footer a{color:rgba(255,255,255,.8)}
+        footer .footer-links{display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem}
+        footer .footer-links a:hover{color:#fff}
+
+        /* responsive */
+        @media(max-width:768px){
+            .hero h1{font-size:2rem}
+            .hero-stats{gap:1.5rem;flex-wrap:wrap}
+            .problem-grid,.testimonial-grid{grid-template-columns:1fr}
+            .product-grid{grid-template-columns:1fr;max-width:400px}
+            .nav-right a:not(.nav-cta){display:none}
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <div class="logo">AI<b>商机内参</b></div>
+        <div class="nav-right">
+            <a href="#product">产品</a>
+            <a href="#sample">样例</a>
+            <a href="#faq">常见问题</a>
+            <a href="#cta" class="nav-cta">立即订阅</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="badge">2026年4月上线 / 已持续更新30+期</div>
+        <h1>AI赚钱的机会，90%是假的。<br>剩下<em>10%</em>我帮你找出来。</h1>
+        <p class="sub">每周3份深度AI商业机会分析报告，帮创业者、副业玩家和传统老板找到真机会、避开假风口。不是科普，是实操指南。</p>
+        <div class="hero-btns">
+            <a href="#cta" class="btn btn-primary">入门版 9.9元/月起</a>
+            <a href="#sample" class="btn btn-outline">查看样例报告</a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat"><div class="num">90<em>%</em></div><div class="label">假风口过滤率</div></div>
+            <div class="stat"><div class="num">3<em>份</em></div><div class="label">每周推送</div></div>
+            <div class="stat"><div class="num">88<em>h</em></div><div class="label">月均研究时长</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- PROBLEMS -->
+<section class="problems">
+    <div class="container">
+        <div class="section-title">
+            <h2>你是不是也有这些困惑</h2>
+            <p>AI时代信息爆炸，但真正能变现的机会少之又少</p>
+        </div>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon">&#9888;</div>
+                <h3>分不清真假</h3>
+                <p>每天刷到各种"AI赚钱"内容，不知道哪个是真的、哪个是割韭菜，试错成本太高。</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">&#9881;</div>
+                <h3>不敢入局</h3>
+                <p>想用AI做副业或转型，又怕选错方向，白忙活几个月，错过真正的窗口期。</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">&#9733;</div>
+                <h3>看不懂案例</h3>
+                <p>那些"月入10万"的AI案例，看完还是不知道怎么复制，缺乏可执行的行动步骤。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCT -->
+<section id="product">
+    <div class="container">
+        <div class="section-title">
+            <h2>选择适合你的版本</h2>
+            <p>9.9元入门试试水，满意再升级</p>
+        </div>
+        <div class="product-grid">
+            <!-- Free -->
+            <div class="plan-card">
+                <div class="plan-name">免费版</div>
+                <div class="plan-price">0元</div>
+                <div class="plan-desc">每周1期精简报告，在小红书公开发布</div>
+                <ul class="plan-features">
+                    <li>每周1期精简版报告</li>
+                    <li>TOP1商机概览</li>
+                    <li class="disabled">深度拆解与行动清单</li>
+                    <li class="disabled">可行性评分</li>
+                    <li class="disabled">风险提示</li>
+                </ul>
+                <a href="https://www.xiaohongshu.com/search_result?keyword=AI观察笔记&source=web_search_result_notes" target="_blank" class="plan-btn ghost">在小红书免费看</a>
+            </div>
+            <!-- Starter -->
+            <div class="plan-card popular">
+                <div class="plan-tag">最受欢迎</div>
+                <div class="plan-name">入门版</div>
+                <div class="plan-price">9.9元<span>/月</span></div>
+                <div class="plan-desc">每周2期完整报告，PDF推送，低成本验证AI机会</div>
+                <ul class="plan-features">
+                    <li>每周2期完整版报告</li>
+                    <li>TOP2当期真商机 + 拆解</li>
+                    <li>可行性评分</li>
+                    <li>风险提示</li>
+                    <li class="disabled">行动清单</li>
+                    <li class="disabled">月度深度拆解</li>
+                </ul>
+                <a href="#cta" class="plan-btn primary">立即订阅</a>
+            </div>
+            <!-- Pro -->
+            <div class="plan-card">
+                <div class="plan-name">专业版</div>
+                <div class="plan-price">49元<span>/月</span></div>
+                <div class="plan-desc">每周3期完整报告 + 行动清单 + 定制分析</div>
+                <ul class="plan-features">
+                    <li>入门版全部内容 + 每周多1期</li>
+                    <li>TOP3当期真商机 + 深度拆解</li>
+                    <li>行动清单（照着做就行）</li>
+                    <li>市场规模数据</li>
+                    <li>每月1次深度拆解特别报告</li>
+                    <li>可指定方向定制分析（每月1次）</li>
+                    <li>优先回复（24小时内）</li>
+                </ul>
+                <a href="#cta" class="plan-btn outline">立即订阅</a>
+            </div>
+            <!-- Enterprise -->
+            <div class="plan-card">
+                <div class="plan-name">企业版</div>
+                <div class="plan-price">499元<span>/月</span></div>
+                <div class="plan-desc">定制化行业监测 + 战略建议 + 专属咨询</div>
+                <ul class="plan-features">
+                    <li>专业版全部内容</li>
+                    <li>定制化行业监测（3个赛道持续追踪）</li>
+                    <li>月度战略建议报告（PPT）</li>
+                    <li>不限次微信/邮件咨询</li>
+                    <li>季度1对1深度咨询（60分钟）</li>
+                </ul>
+                <a href="#cta" class="plan-btn outline">联系我们</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SAMPLE -->
+<section id="sample" class="sample">
+    <div class="container">
+        <div class="section-title">
+            <h2>报告长什么样</h2>
+            <p>以下是报告的部分内容预览，完整版更详尽</p>
+        </div>
+        <div class="sample-card">
+            <div class="sample-header">
+                <h3>AI商机内参 #028</h3>
+                <div class="sample-date">2026年4月27日</div>
+            </div>
+            <div class="sample-item">
+                <div class="tag">置信度 85%</div>
+                <h4>AI垂直行业SaaS - 中小企业数字员工</h4>
+                <p>面向餐饮、零售等中小企业，提供AI数字员工解决方案（智能客服、订单处理、数据分析）。月订阅制，客单价200-500元。国内中小企业超4000万家，当前渗透率不到2%，窗口期约12个月。</p>
+            </div>
+            <div class="sample-item">
+                <div class="tag">置信度 78%</div>
+                <h4>AI+跨境电商选品工具</h4>
+                <p>利用AI分析海外社交媒体趋势数据，辅助跨境电商卖家选品。工具类产品，按月订阅。目标用户为中小跨境卖家，国内约500万家。竞品少，技术门槛适中。</p>
+            </div>
+            <div class="sample-item">
+                <div class="tag">置信度 72%</div>
+                <h4>本地生活AI内容代运营</h4>
+                <p>为本地商户（餐饮、美容、教培）提供AI辅助的短视频/图文内容代运营服务。月费制，客单价1500-3000元。技术已成熟，关键在销售能力。</p>
+            </div>
+            <div class="sample-more">
+                <a href="#cta">订阅后可查看完整报告（含行动清单、风险评估、启动成本） &rarr;</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+    <div class="container">
+        <div class="section-title">
+            <h2>订阅者怎么说</h2>
+            <p>来自真实用户的反馈</p>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"之前在各种AI群里潜水了大半年，全是概念。看了商机内参之后，第2周就选定了AI内容代运营的方向，现在已经接到第一个客户了。"</p>
+                <div class="author"><span>陈先生</span> / 深圳 · 副业探索者</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"报告里的风险提示特别好，帮我省了至少2000块的试错成本。9块9一个月，试错成本几乎为零，值。"</p>
+                <div class="author"><span>林女士</span> / 广州 · 电商从业者</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"作为传统行业老板，最怕跟风投钱打水漂。这份报告帮我理清了哪些AI工具是真能降本增效的，哪些是噱头。"</p>
+                <div class="author"><span>王总</span> / 东莞 · 制造业</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="faq">
+    <div class="container">
+        <div class="section-title">
+            <h2>常见问题</h2>
+            <p>订阅前你可能想了解的</p>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">和网上免费AI资讯有什么区别？<span class="arrow">&#9660;</span></div>
+                <div class="faq-a">免费内容追热点，我们挖真机会。免费内容只讲"AI能做什么"，我们告诉你"你怎么用AI赚钱"和"有什么坑"。每份报告都经过信息验证、可行性评估和风险分析，不是简单搬运资讯。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">如果觉得不值怎么办？<span class="arrow">&#9660;</span></div>
+                <div class="faq-a">订阅后7天内，如果你觉得报告质量不符合预期，可以申请全额退款，无条件退。我们对内容质量有信心。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">报告怎么发送？<span class="arrow">&#9660;</span></div>
+                <div class="faq-a">通过微信私聊点对点发送PDF文件，每次推送都会有提醒。你也可以在小红书私信我们获取。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">入门版和专业版的核心区别？<span class="arrow">&#9660;</span></div>
+                <div class="faq-a">入门版每周2期报告，覆盖TOP2商机和可行性评分，适合想低成本了解AI机会的人。专业版每周3期，额外包含行动清单、市场规模数据和月度深度拆解特别报告，还可以指定方向做定制分析。如果你打算认真入局某个方向，建议直接上专业版。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">我是小白，能看懂吗？<span class="arrow">&#9660;</span></div>
+                <div class="faq-a">完全可以。报告专门写给普通人看的，没有技术术语堆砌。每个机会都配有"行动清单"，就是一步一步告诉你该怎么做。</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="cta">
+    <div class="container">
+        <h2>9.9元，开始找到你的AI变现方向</h2>
+        <p>入门版限时特惠 <strong>9.9元/月</strong>，前200名订阅后永久锁定此价格</p>
+        <div class="hero-btns">
+            <a href="https://www.xiaohongshu.com/search_result?keyword=AI观察笔记&source=web_search_result_notes" target="_blank" class="btn btn-primary" style="font-size:1rem;padding:.8rem 2rem">打开小红书搜索: AI观察笔记</a>
+        </div>
+        <div class="guarantee">7天无理由退款保证 | 支持随时取消订阅</div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-links">
+        <a href="https://www.xiaohongshu.com/search_result?keyword=AI观察笔记&source=web_search_result_notes" target="_blank">小红书: AI观察笔记</a>
+        <a href="#faq">常见问题</a>
+        <a href="mailto:contact@kfkfkf.xyz">联系我们</a>
+    </div>
+    <p>AI商机内参 &copy; 2026 &nbsp;|&nbsp; 本报告内容由AI分析系统生成，人工审核后发送</p>
+    <p style="margin-top:.3rem">报告内容仅供参考，不构成投资建议</p>
+</footer>
+
+<script>
+function toggleFaq(el){
+    el.classList.toggle('open');
+    var a=el.nextElementSibling;
+    a.classList.toggle('show');
+}
+</script>
+
+</body>
+</html>
